@@ -22,13 +22,14 @@ pipeline{
         stage("TF Apply"){
             steps{
                 echo "Executing Terraform Apply"
+                sh "terraform apply -auto-approve"
             }
         }
         stage("Invoke Lambda"){
             steps{
                 echo "Invoking your AWS Lambda"
                 sh "aws --version"
-                sh "aws lambda list-functions"
+                sh "aws lambda invoke --function-name jim_brannon_devops_candidate_exam --log-type Tail"
             }
         }
     }
