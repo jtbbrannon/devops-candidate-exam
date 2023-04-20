@@ -15,6 +15,7 @@ resource "aws_lambda_function" "lambda" {
   runtime = "python3.9"
   handler = "lambda_function.lambda_handler"
 
+  filename = "${path.module}/output.zip"
   source_code_hash = data.archive_file.lambda_script.output_base64sha256
 
   role = data.aws_iam_role.lambda.arn
