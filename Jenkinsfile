@@ -29,8 +29,7 @@ pipeline{
             steps{
                 echo "Invoking your AWS Lambda"
                 sh "aws --version"
-                echo "Pattern 's/^[^:]*:\\s*\"(.*)\".*$/\\1/'"
-                sh "aws lambda invoke --function-name jim_brannon_devops_candidate_exam logfile.log --log-type Tail  | grep \"LogResult\" | sed -r 's/^[^:]*:\\s*\"(.*)\".*$/\\1/' | base64 --decode"
+                sh "aws lambda invoke --function-name jim_brannon_devops_candidate_exam logfile.log --log-type Tail"
             }
         }
     }
