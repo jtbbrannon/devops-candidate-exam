@@ -29,7 +29,8 @@ pipeline{
             steps{
                 echo "Invoking your AWS Lambda"
                 sh "aws --version"
-                sh "aws lambda invoke --function-name jim_brannon_devops_candidate_exam logfile.log --log-type Tail"
+                def jsonObj = readJSON text: sh ("aws lambda invoke --function-name jim_brannon_devops_candidate_exam logfile.log --log-type Tail")
+                sh "echo ${jsonObj.LogResult}"
             }
         }
     }
