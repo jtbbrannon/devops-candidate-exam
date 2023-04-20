@@ -1,6 +1,5 @@
 import logging as log
 import json
-import requests
 import os
 
 def lambda_handler(event, context=None):

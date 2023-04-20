@@ -1,11 +1,7 @@
-locals {
-    out_zip = "output.zip"
-}
-
 data "archive_file" "lambda_script" {
   type = "zip"
 
-  source_dir  = "${path.module}/output"
+  source_dir  = "${path.module}/lambda_function.py"
   output_path = "${path.module}/output.zip"
 }
 
