@@ -1,9 +1,32 @@
 locals {
-    basename = "${path.module}/output"
-    out_zip = "${local.basename}.zip"
+    out_zip = "output.zip"
 }
 
+data "archive_file" "lambda_script" {
+  type = "zip"
 
+  source_dir  = "${path.module}/output"
+  output_path = "${path.module}/output.zip"
+}
+
+resource "aws_lambda_function" "lambda" {
+  function_name = "jim_brannon_devops_candidate_exam"
+
+  runtime = "python3.9"
+  handler = "lambda_function.lambda_handler"
+
+  source_code_hash = data.archive_file.lambda_script.output_base64sha256
+
+  role = data.aws_iam_role.lambda.arn
+
+  environment {
+    variables = {
+      subnet_id = aws_subnet.main.id
+    }
+  }
+
+  timeout = 5
+}
 
 
 resource "aws_subnet" "main" {
@@ -14,7 +37,6 @@ resource "aws_subnet" "main" {
     Name = "jim.brannon"
   }
 }
-
 
 
 output "subnet_id" {

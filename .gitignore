@@ -2,6 +2,7 @@
 **/.terraform/*
 
 **/output
+**/*.zip
 
 # .tfstate files
 *.tfstate
