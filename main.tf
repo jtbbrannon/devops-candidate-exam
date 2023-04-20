@@ -1,3 +1,11 @@
+locals {
+    basename = "${path.module}/output"
+    out_zip = "${local.basename}.zip"
+}
+
+
+
+
 resource "aws_subnet" "main" {
   vpc_id     = data.aws_vpc.vpc.id
   cidr_block = "10.0.24.0/24"
@@ -7,3 +15,8 @@ resource "aws_subnet" "main" {
   }
 }
 
+
+
+output "subnet_id" {
+  value = aws_subnet.main.id
+}

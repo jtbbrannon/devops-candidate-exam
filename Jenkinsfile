@@ -27,6 +27,9 @@ pipeline{
         stage("Invoke Lambda"){
             steps{
                 echo "Invoking your AWS Lambda"
+                sh "jq --version"
+                sh "aws --version"
+                sh "aws lambda list-functions"
             }
         }
     }
